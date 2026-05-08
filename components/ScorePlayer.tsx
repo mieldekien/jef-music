@@ -237,16 +237,18 @@ export default function ScorePlayer({
   useEffect(() => {
     if (scoreStatus !== 'ready' || !rt.current.osmd) return
     const osmd = rt.current.osmd
+    const containerWidth = scoreRef.current?.offsetWidth ?? 800
+    const isMobile = containerWidth < 600
+    osmd.zoom = isMobile ? 0.25 : 0.75
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const rules = (osmd as any).DrawingParameters?.Rules
       if (rules) {
         rules.PageTopMargin = 5; rules.PageBottomMargin = 5
-        rules.PageLeftMargin = 12; rules.PageRightMargin = 12
+        rules.PageLeftMargin = isMobile ? 0 : 12
+        rules.PageRightMargin = isMobile ? 0 : 12
       }
     } catch { /* ok */ }
-    const containerWidth = scoreRef.current?.offsetWidth ?? 800
-    osmd.zoom = containerWidth < 600 ? 0.45 : 0.75
     try { osmd.render() } catch (e) { console.error('OSMD render error:', e) }
     applyCursorStyle(osmd)
 
@@ -794,7 +796,7 @@ export default function ScorePlayer({
         {/* Always in DOM so OSMD can measure width. In noBar mode the page itself scrolls. */}
         <div ref={scoreContainerRef}
           style={noBar ? {} : { maxHeight: '65vh', overflowY: 'auto', overflowX: 'hidden' }}>
-          <div ref={scoreRef} style={{ padding: '16px 12px 12px', background: 'white' }} />
+          <div ref={scoreRef} style={{ padding: '16px 10px 12px', background: 'white' }} />
         </div>
       </div>
     </div>
