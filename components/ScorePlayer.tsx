@@ -793,7 +793,7 @@ export default function ScorePlayer({
         {/* Always in DOM so OSMD can measure width. In noBar mode the page itself scrolls. */}
         <div ref={scoreContainerRef}
           style={noBar ? {} : { maxHeight: '65vh', overflowY: 'auto', overflowX: 'hidden' }}>
-          <div ref={scoreRef} style={{ padding: '16px 12px 12px', background: 'white' }} />
+          <div ref={scoreRef} style={{ padding: '16px 12px 12px', background: 'white', minWidth: noBar ? 900 : undefined }} />
         </div>
       </div>
     </div>

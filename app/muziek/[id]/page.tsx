@@ -183,7 +183,7 @@ export default function SongPage() {
       )}
 
       {/* ── Score (scrollable, full height) ─────────────── */}
-      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: 110 }}>
+      <div style={{ flex: 1, overflow: 'auto', paddingBottom: 110 }}>
         {song.xml_url ? (
           <ScorePlayer
             xmlUrl={song.xml_url}
