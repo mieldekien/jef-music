@@ -113,6 +113,14 @@ export default function Metronome({ defaultBpm = 120, compact = false }: { defau
   useEffect(() => { accRef.current   = accents },      [accents])
   useEffect(() => { beatsRef.current = TIME_SIGS.find(t => t.sig === timeSig)!.beats }, [timeSig])
 
+  // Stop metronome on unmount (page navigation)
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+      ctxRef.current?.close()
+    }
+  }, [])
+
   // sync accents when time sig changes
   useEffect(() => {
     const def = TIME_SIGS.find(t => t.sig === timeSig)!.defaultAccents
