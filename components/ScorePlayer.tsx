@@ -239,7 +239,7 @@ export default function ScorePlayer({
     const osmd = rt.current.osmd
     const containerWidth = scoreRef.current?.offsetWidth ?? 800
     const isMobile = containerWidth < 600
-    osmd.zoom = isMobile ? 0.20 : 0.75
+    osmd.zoom = isMobile ? 0.40 : 0.75
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const rules = (osmd as any).DrawingParameters?.Rules
