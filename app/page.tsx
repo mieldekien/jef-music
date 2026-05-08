@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useNavigate } from '@/components/PageTransition'
 import { ChevronRight } from 'lucide-react'
 
 const groups = [
@@ -9,7 +9,7 @@ const groups = [
     name:  'JEF',
     full:  'Jong El Fuerte',
     desc:  'Partituren, planning & oefeningen voor leden',
-    href:  '/login',
+    href:  '/jef',
     badge: null,
     accent: 'var(--accent)',
     bg:    '#0d1e35',
@@ -29,7 +29,7 @@ const groups = [
 ]
 
 export default function HomePage() {
-  const router = useRouter()
+  const navigate = useNavigate()
 
   return (
     <div className="min-h-screen flex flex-col items-center px-5 pt-14 pb-10"
@@ -48,7 +48,7 @@ export default function HomePage() {
         {groups.map(g => (
           <button
             key={g.id}
-            onClick={() => router.push(g.href)}
+            onClick={() => navigate(g.href)}
             className="w-full text-left rounded-3xl p-6 transition active:scale-[0.98] hover:opacity-90"
             style={{ background: g.bg, border: `1.5px solid ${g.border}` }}>
 

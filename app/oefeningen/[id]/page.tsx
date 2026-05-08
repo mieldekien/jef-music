@@ -1,5 +1,6 @@
 'use client'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
+import { useNavigate } from '@/components/PageTransition'
 import { useEffect, useState, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { ArrowLeft, Timer, ChevronDown, ChevronUp } from 'lucide-react'
@@ -21,7 +22,7 @@ const DIFFICULTY = ['','●','●●','●●●']
 
 export default function ExerciseDetailPage() {
   const { id }     = useParams<{ id: string }>()
-  const router     = useRouter()
+  const navigate   = useNavigate()
   const supabase   = createClient()
 
   const [exercise,  setExercise]  = useState<Exercise | null>(null)
@@ -77,7 +78,7 @@ export default function ExerciseDetailPage() {
     <div className="min-h-screen pb-24" style={{ background: 'var(--bg)' }}>
       {/* Header */}
       <div className="flex items-center gap-3 px-5 pt-12 pb-4">
-        <button onClick={() => router.back()} className="p-2 rounded-xl" style={{ color: '#7a9ab8' }}>
+        <button onClick={() => navigate('/oefeningen')} className="p-2 rounded-xl" style={{ color: '#7a9ab8' }}>
           <ArrowLeft size={22} />
         </button>
         <div className="flex-1 min-w-0">

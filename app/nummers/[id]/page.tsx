@@ -7,9 +7,9 @@ import MidiPlayer from '@/components/MidiPlayer'
 import type { Song } from '@/lib/types'
 
 const DEMO_SONGS: Song[] = [
-  { id: '1', title: 'El Fuerte March', composer: 'Traditie', bpm: 120, category: 'Mars', difficulty: 2, instruments: ['Drum', 'Bugel'], pdf_url: null, audio_url: null, midi_url: null, xml_url: null, section: 'slagwerk', show: 'Show 1', created_at: '' },
-  { id: '2', title: 'Zomerklanken', composer: 'Jan Pieters', bpm: 96, category: 'Showstuk', difficulty: 1, instruments: ['Drum', 'Lier'], pdf_url: null, audio_url: null, midi_url: null, xml_url: null, section: 'melodisch', show: 'Show 1', created_at: '' },
-  { id: '3', title: 'Vuurwerk Finale', composer: null, bpm: 140, category: 'Finale', difficulty: 3, instruments: ['Drum'], pdf_url: null, audio_url: null, midi_url: null, xml_url: null, section: 'slagwerk', show: 'Show 2', created_at: '' },
+  { id: '1', title: 'El Fuerte March', composer: 'Traditie', bpm: 120, category: 'Mars', difficulty: 2, instruments: ['Drum', 'Bugel'], pdf_url: null, audio_url: null, mp3_url: null, midi_url: null, xml_url: null, section: 'slagwerk', show: 'Show 1', created_at: '' },
+  { id: '2', title: 'Zomerklanken', composer: 'Jan Pieters', bpm: 96, category: 'Showstuk', difficulty: 1, instruments: ['Drum', 'Lier'], pdf_url: null, audio_url: null, mp3_url: null, midi_url: null, xml_url: null, section: 'melodisch', show: 'Show 1', created_at: '' },
+  { id: '3', title: 'Vuurwerk Finale', composer: null, bpm: 140, category: 'Finale', difficulty: 3, instruments: ['Drum'], pdf_url: null, audio_url: null, mp3_url: null, midi_url: null, xml_url: null, section: 'slagwerk', show: 'Show 2', created_at: '' },
 ]
 
 export default function SongPage() {

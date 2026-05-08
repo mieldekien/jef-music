@@ -8,6 +8,7 @@ export type Song = {
   instruments: string[]
   pdf_url: string | null
   audio_url: string | null
+  mp3_url: string | null
   midi_url: string | null
   xml_url: string | null
   section: 'slagwerk' | 'melodisch' | null

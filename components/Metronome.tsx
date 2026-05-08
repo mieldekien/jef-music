@@ -39,34 +39,33 @@ function playClick(ctx: AudioContext, time: number, accent: boolean, sound: Soun
   if (sound === 'klik') {
     const osc  = ctx.createOscillator()
     const gain = ctx.createGain()
-    osc.frequency.value = accent ? 1200 : 900
-    gain.gain.setValueAtTime(vol * 0.8, time)
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.06)
+    osc.frequency.value = accent ? 1800 : 1300
+    gain.gain.setValueAtTime(vol, time)
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.04)
     osc.connect(gain); gain.connect(ctx.destination)
-    osc.start(time); osc.stop(time + 0.07)
+    osc.start(time); osc.stop(time + 0.05)
 
   } else if (sound === 'hout') {
-    // woodblock: two brief oscillators
-    [accent ? 1800 : 1400, accent ? 2600 : 2000].forEach((f, i) => {
+    [accent ? 2200 : 1700, accent ? 3200 : 2400].forEach((f, i) => {
       const osc  = ctx.createOscillator()
       const gain = ctx.createGain()
       osc.frequency.value = f
-      gain.gain.setValueAtTime(vol * (i === 0 ? 0.7 : 0.3), time)
-      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.035)
+      gain.gain.setValueAtTime(vol * (i === 0 ? 0.8 : 0.4), time)
+      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.025)
       osc.connect(gain); gain.connect(ctx.destination)
-      osc.start(time); osc.stop(time + 0.04)
+      osc.start(time); osc.stop(time + 0.03)
     })
 
   } else if (sound === 'tikkel') {
-    const buf  = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.018), ctx.sampleRate)
+    const buf  = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.015), ctx.sampleRate)
     const data = buf.getChannelData(0)
     for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length)
     const src  = ctx.createBufferSource(); src.buffer = buf
-    const hp   = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 3000
+    const hp   = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 6000
     const gain = ctx.createGain()
-    gain.gain.setValueAtTime(vol * 0.9, time)
+    gain.gain.setValueAtTime(vol * 1.2, time)
     src.connect(hp); hp.connect(gain); gain.connect(ctx.destination)
-    src.start(time); src.stop(time + 0.02)
+    src.start(time); src.stop(time + 0.018)
 
   } else { // bel
     const osc  = ctx.createOscillator()
@@ -157,7 +156,7 @@ export default function Metronome({ defaultBpm = 120, compact = false }: { defau
   }
 
   function changeBpm(d: number) {
-    setBpm(b => Math.min(200, Math.max(40, b + d)))
+    setBpm(b => Math.min(260, Math.max(60, b + d)))
   }
 
   function tap() {
@@ -232,10 +231,10 @@ export default function Metronome({ defaultBpm = 120, compact = false }: { defau
             </div>
 
             <input
-              type="number" min={40} max={200} value={bpm}
-              onChange={e => setBpm(Math.min(200, Math.max(40, parseInt(e.target.value) || bpm)))}
+              type="text" inputMode="numeric" value={bpm}
+              onChange={e => setBpm(Math.min(260, Math.max(60, parseInt(e.target.value) || bpm)))}
               className="text-center bg-transparent outline-none tabular-nums font-black text-white"
-              style={{ fontSize: compact ? 52 : 76, lineHeight: 1, width: compact ? 90 : 110 }}
+              style={{ fontSize: compact ? 52 : 80, lineHeight: 1, width: compact ? 110 : 170 }}
             />
 
             <div className="flex gap-1">
@@ -250,12 +249,12 @@ export default function Metronome({ defaultBpm = 120, compact = false }: { defau
 
           {/* Slider 40–200, 120 = middle */}
           <div className="mt-2 mb-1 px-2">
-            <input type="range" min={40} max={200} value={bpm}
+            <input type="range" min={60} max={260} value={bpm}
               onChange={e => setBpm(Number(e.target.value))}
               className="w-full h-1 rounded-full cursor-pointer"
               style={{ accentColor: '#50B4E4' }} />
             <div className="flex justify-between text-xs mt-0.5" style={{ color: '#2a4060' }}>
-              <span>40</span><span className="opacity-50">120</span><span>200</span>
+              <span>60</span><span className="opacity-50">160</span><span>260</span>
             </div>
           </div>
         </div>

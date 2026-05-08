@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useNavigate } from '@/components/PageTransition'
 import { ArrowLeft, Upload, Plus } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 
@@ -8,7 +8,7 @@ const CATS       = ['Rudiment', 'Marching', 'Techniek', 'Show', 'Andere']
 const DIFFICULTIES = [{ val:'1', label:'● Makkelijk' }, { val:'2', label:'●● Gemiddeld' }, { val:'3', label:'●●● Moeilijk' }]
 
 export default function AddOefeningPage() {
-  const router   = useRouter()
+  const navigate = useNavigate()
   const supabase = createClient()
 
   const [form, setForm] = useState({ title:'', description:'', category:'Rudiment', difficulty:'2' })
@@ -91,7 +91,7 @@ export default function AddOefeningPage() {
   return (
     <div className="min-h-screen px-5 pb-16" style={{ background: 'var(--bg)' }}>
       <div className="flex items-center gap-3 pt-12 pb-6">
-        <button onClick={() => router.back()} style={{ color: '#7a9ab8' }}><ArrowLeft size={22} /></button>
+        <button onClick={() => navigate('/admin')} style={{ color: '#7a9ab8' }}><ArrowLeft size={22} /></button>
         <div>
           <h1 className="text-xl font-bold text-white">Oefening toevoegen</h1>
           <p className="text-xs" style={{ color: '#4a6a8a' }}>CREW — Admin</p>

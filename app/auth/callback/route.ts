@@ -6,6 +6,8 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
 
+  let redirectTo = `${origin}/jef`
+
   if (code) {
     const cookieStore = await cookies()
     const supabase = createServerClient(
@@ -20,8 +22,12 @@ export async function GET(request: NextRequest) {
         },
       }
     )
-    await supabase.auth.exchangeCodeForSession(code)
+    const { data } = await supabase.auth.exchangeCodeForSession(code)
+    // New user with no instrument → send to onboarding step
+    if (data.user && !data.user.user_metadata?.instrument) {
+      redirectTo = `${origin}/login?step=instrument`
+    }
   }
 
-  return NextResponse.redirect(`${origin}/nummers`)
+  return NextResponse.redirect(redirectTo)
 }
