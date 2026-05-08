@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useNavigate } from '@/components/PageTransition'
 import Image from 'next/image'
@@ -23,7 +23,7 @@ const INSTRUMENT_GROUPS = [
 
 type Step = 'email' | 'instrument'
 
-export default function LoginPage() {
+function LoginContent() {
   const searchParams = useSearchParams()
   const [step,       setStep]       = useState<Step>(searchParams.get('step') === 'instrument' ? 'instrument' : 'email')
   const [email,      setEmail]      = useState('')
@@ -194,4 +194,8 @@ export default function LoginPage() {
       </div>
     </div>
   )
+}
+
+export default function LoginPage() {
+  return <Suspense><LoginContent /></Suspense>
 }
