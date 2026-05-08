@@ -245,7 +245,8 @@ export default function ScorePlayer({
         rules.PageLeftMargin = 12; rules.PageRightMargin = 12
       }
     } catch { /* ok */ }
-    osmd.zoom = 0.75
+    const containerWidth = scoreRef.current?.offsetWidth ?? 800
+    osmd.zoom = containerWidth < 600 ? 0.45 : 0.75
     try { osmd.render() } catch (e) { console.error('OSMD render error:', e) }
     applyCursorStyle(osmd)
 
@@ -793,7 +794,7 @@ export default function ScorePlayer({
         {/* Always in DOM so OSMD can measure width. In noBar mode the page itself scrolls. */}
         <div ref={scoreContainerRef}
           style={noBar ? {} : { maxHeight: '65vh', overflowY: 'auto', overflowX: 'hidden' }}>
-          <div ref={scoreRef} style={{ padding: '16px 12px 12px', background: 'white', minWidth: noBar ? 900 : undefined }} />
+          <div ref={scoreRef} style={{ padding: '16px 12px 12px', background: 'white' }} />
         </div>
       </div>
     </div>
