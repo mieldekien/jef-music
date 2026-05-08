@@ -239,7 +239,7 @@ export default function ScorePlayer({
     const osmd = rt.current.osmd
     const containerWidth = scoreRef.current?.offsetWidth ?? 800
     const isMobile = containerWidth < 600
-    osmd.zoom = isMobile ? 0.25 : 0.75
+    osmd.zoom = isMobile ? 0.20 : 0.75
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const rules = (osmd as any).DrawingParameters?.Rules
@@ -796,7 +796,7 @@ export default function ScorePlayer({
         {/* Always in DOM so OSMD can measure width. In noBar mode the page itself scrolls. */}
         <div ref={scoreContainerRef}
           style={noBar ? {} : { maxHeight: '65vh', overflowY: 'auto', overflowX: 'hidden' }}>
-          <div ref={scoreRef} style={{ padding: '16px 10px 12px', background: 'white' }} />
+          <div ref={scoreRef} style={{ padding: '16px 40px 12px 10px', background: 'white' }} />
         </div>
       </div>
     </div>
