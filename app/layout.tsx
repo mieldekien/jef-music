@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Poppins } from 'next/font/google'
 import SplashScreen from '@/components/SplashScreen'
+import FloatingAI from '@/components/FloatingAI'
 import './globals.css'
 
 const poppins = Poppins({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="nl" className={poppins.variable}>
       <body className="min-h-screen">
           <SplashScreen />
+          <FloatingAI />
           {children}
         </body>
     </html>

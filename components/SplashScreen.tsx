@@ -32,8 +32,8 @@ export default function SplashScreen() {
         priority
         className="drop-shadow-2xl"
       />
-      <p className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: '#C8D5DC' }}>
-        Muziekstand
+      <p className="text-sm font-semibold tracking-[0.3em] uppercase" style={{ color: '#DAD74D' }}>
+        in vuur en vlam
       </p>
     </div>
   )
